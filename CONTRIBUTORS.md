@@ -45,3 +45,8 @@ This project exists because of your time, effort, and curiosity.
 - **GitHub:** https://github.com/gaurav9479
 - **About:** I am gaurav B.Tech Materials Engineering MNNIT Allahabad i am trying to learn open source contribuion in OPENCODE-25
 
+- **Name:** Jatin
+- **GitHub:** https://github.com/thenix09
+- **About:** First-year student interested in software engineering and open source.
+
+
