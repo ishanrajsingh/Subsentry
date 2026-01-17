@@ -4,12 +4,11 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/nextjs';
 import Link from 'next/link';
 import DashboardLayout from '../components/DashboardLayout';
-import { 
-  DollarSign, 
-  CreditCard, 
-  AlertTriangle, 
-  Clock,
-  TrendingUp,
+import SummaryWidgets from './SummaryWidget';
+import UpcomingRenewals from './UpcomingRenewals';
+
+import {
+  AlertTriangle,
   ArrowRight,
   Loader2,
   Plus,
@@ -234,46 +233,21 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {summaryCards.map((card) => {
-          const Icon = card.icon;
-          return (
-            <div 
-              key={card.label} 
-              className={cn(
-                "p-5 rounded-xl border transition-all duration-200 hover:border-[#2a2a2a]",
-                card.highlight 
-                  ? "bg-gradient-to-br from-[#0f0f0f] to-[#0a0a0a] border-amber-500/30" 
-                  : "bg-[#0f0f0f] border-[#1a1a1a]"
-              )}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  {card.label}
-                </span>
-                <div className={cn("w-9 h-9 rounded-lg flex items-center justify-center", card.iconBg)}>
-                  <Icon className={cn("w-4 h-4", card.iconColor)} />
-                </div>
-              </div>
-              <div className="text-2xl font-bold text-white">{card.value}</div>
-              <div className={cn("text-xs mt-1", card.highlight ? card.iconColor : "text-gray-500")}>
-                {card.hint}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      {/* Summary Widgets */}
+      <SummaryWidgets />
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent Subscriptions */}
-        <div className="lg:col-span-2 bg-[#0f0f0f] rounded-xl border border-[#1a1a1a] p-6">
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="text-lg font-semibold text-white">Upcoming Renewals</h3>
-            <Link 
-              href="/subscriptions" 
-              className="text-sm text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors"
+      {/* Upcoming Renewals Section */}
+      <UpcomingRenewals subscriptions={subs} />
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2 rounded-xl border border-[#1a1a1a] bg-[#0f0f0f] p-6">
+          <div className="mb-5 flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-white">
+              Upcoming Renewals
+            </h3>
+            <Link
+              href="/subscriptions"
+              className="flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300"
             >
               View all <ArrowRight className="w-4 h-4" />
             </Link>
